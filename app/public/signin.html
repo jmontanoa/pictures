@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+    <header>
+        <title>Login page</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    </header>
+    <body>
+        <h3>Welcome to PICs, to sign in please give a user name and password</h3>
+
+        <br/>
+        <form action="/users" method="POST">
+            <input type="text" name=users[username] placeholder="Username"/>
+            <br/>
+            <input type="password" name=users[password] placeholder="Password"/>
+            <br/>
+            <input type="password" name="password" placeholder="Confirm Password"/>
+            <button name="login" type="submit">Sign In</button>
+        </form>
+    </body>
+
+</html>
