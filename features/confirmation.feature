@@ -6,7 +6,8 @@ Feature: Confirmation Form
         Given I have an confirmation link into my email
         When I click over confirmation link
         Then I should see the confirmation form
-        When I enter my information
-        And I navigate to the login page 
-      	And I enter my account credentials
-        Then I should see the Pics home page
+        When I enter "user" in the username 
+        And I enter "user1" in the lastname
+        And I enter "user@t.com" in the email 
+        And I enter "testing" in the password
+        Then I should see the PICS home page
