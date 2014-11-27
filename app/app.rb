@@ -7,7 +7,7 @@ class Users
   property :id, Serial 
   property :username, String 
   property :password, String
-  property :status, Boolean
+  property :status, Boolean, :default => false
   property :fullname, String
   property :email, String 
   property :token, String
@@ -41,12 +41,11 @@ end
 
 
 post '/users' do 
-   users = Users.new(params[:users]) 
-   users.token='ABCD123'
-   #user.status=False
-    
+   users = Users.new(params[:users])
+
+   users.token = "#{users.usename}#{users.id}" 
    if users.save
-   	  return  "Welcome to PICs, Please confirm your account to have full access" 
+   	  return  "Welcome to PICs, Please confirm your account to have full access" + "#{users.token}"
    end
 end 
 
