@@ -11,6 +11,15 @@ class Users
   property :fullname, String
   property :email, String 
   property :token, String
+  has n, :Pictures
+end 
+
+class Pictures 
+  include DataMapper::Resource 
+  property :id, Serial 
+  property :folder, String 
+  property :tag, String
+  belongs_to :Users
 end 
 
 DataMapper.finalize.auto_upgrade!
