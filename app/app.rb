@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'data_mapper'
+
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/pics.db")
 
 class Users 
@@ -30,6 +31,7 @@ get "/link" do
 end
 
 get "/enroll" do
+
     redirect "/enroll.html"
 end
 
