@@ -40,6 +40,12 @@ post "/enroll.html" do
     
 end
 
+post '/upload_image' do
+    tempfile = params[:file][:tempfile] 
+    filename = params[:file][:filename] 
+    cp(tempfile.path, "public/uploads/#{filename}")
+end
+
 get "/" do
     redirect "/signin.html"
 end
