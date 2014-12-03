@@ -8,7 +8,7 @@ When(/^When I click Create Folder link$/) do
 end
 
 Then(/^I should see the Create Folder page$/) do 
-    visit   "http://localhost:4567/enroll"
+    visit   "http://localhost:4567/createfolder"
     expect(page).to have_content "PICS"
 end
 
