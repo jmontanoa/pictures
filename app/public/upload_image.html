@@ -36,10 +36,25 @@
 
 	<!-- Head -->
 	<h1>Upload Image</h1>
-
-	<form action='/upload' enctype="multipart/form-data" method='POST'>
-    	<input name="file" type="file" />
-    	<input type="button" value="Upload" />
-	</form>
-
+  <table>
+  	<form action='/upload' enctype="multipart/form-data" method='POST'>
+      <tr>
+        <strong>Folder: </strong>
+        
+      		<select>
+      		  <option value="FolderA">Folder A</option>
+      		  <option value="FolderB">Folder B</option>
+      		  <option value="FolderC">Folder C</option>
+      		  <option value="FolderD">Folder D</option>
+      		</select>
+      
+      </tr> 
+      <BR> <BR>
+      <tr>
+      	<input name="file" type="file" />
+               
+      	<input type="button" value="Upload" />
+      </tr> 
+  	</form>
+  </table>
 </html>
