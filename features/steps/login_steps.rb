@@ -7,6 +7,7 @@ When(/^I enter "([^"]*)" in the username$/) do |username|
 end
 When(/^I enter "(.*?)" in the email$/) do |email|
         fill_in "email", :with => email
+        click_button "Sign In"
 end
 Then(/^I should see the  home page$/) do
     expect(page).to have_content "PICS"
