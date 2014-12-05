@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+  <title>Folder List</title>
+  <style type="text/css">
+  body {
+    padding-left: 11em;
+    font-family: Georgia, "Times New Roman",
+          Times, serif;
+    color: purple;
+    background-color: #EFFBFB }
+  ul.navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 9em }
+  h1 {
+    font-family: Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif }
+  ul.navbar li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em }
+  ul.navbar a {
+    text-decoration: none }
+  a:link {
+    color: blue }
+  a:visited {
+    color: purple }
+  </style>
+
+</head>
+
+	<!-- Head -->
+	<h1>Folder List</h1>
+  <table>
+  	<form action='/upload' enctype="multipart/form-data" method='POST'>
+      <tr>
+        <td><strong>Folder Name </strong></td>
+        <td><strong>      </strong></td>
+      </tr> 
+      
+      <tr>
+      	<td>Folder A </td>
+        <td><a href="upload_image.html">Edit</a>
+        </td>
+      </tr> 
+      <td>Folder B</td>
+        <td><a href="upload_image.html">Edit</a>
+      </td>
+      </tr> 
+  	</form>
+  </table>
+</html>

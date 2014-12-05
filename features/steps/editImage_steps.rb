@@ -1,23 +1,18 @@
-Given(/^I am in the Main page$/) do
-    puts "I have an image to upload"
+Given(/^I am in the Folder List page$/) do
+    expect(page).to have_content "Folder A"
 end
 
-When(/^I click on upload image link$/) do
+When(/^I click on edit link$/) do
 	#upload_image,html
     visit   "http://localhost:4567/upload_image"  
 end
 Then(/^I should see the upload_image form$/) do 
     expect(page).to have_content "Upload Image"
-end
-
-When(/^I click on Folder list$/) do
-   select('Folder A', from: 'Folder_list')
-end
-Then(/^I should see the selected Folder in the Folder list$/) do |Folder A|
     expect(page).to have_selector("Folder A")
+    expect(page).to have_content "image_1.jpg"     
 end
 
-When(/^I click "Browse" button in the upload_image form$/) do 
+When(/^I click "Browse" button in the edit_image form$/) do 
         click_button "Browse"
 end
 Then(/^I should see the  File Upload pop up$/) do
@@ -38,7 +33,7 @@ Then(/^I should see the image name in the upload_image form$/) do
     expect(page).to have_content "image.jpg"	 
 end
 
-When(/^I click on the "upload" button in the upload_image form$/) do
+When(/^I click on the "upload" button in the edit_image form$/) do
     click_button "Upload"
 end
 Then(/^I should see the  home page$/) do
