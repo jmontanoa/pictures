@@ -2,6 +2,8 @@ require 'sinatra'
 require 'data_mapper'
 require 'bcrypt'
 
+enable :sessions
+
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/pics.db")
 
 class User 
@@ -14,6 +16,7 @@ class User
   property :email, String 
   property :token, BCryptHash, :unique => true, :default => lambda { |r, p| r.username}
   has n, :pictures
+  has n, :folders
 end 
 
 class Picture 
@@ -21,8 +24,18 @@ class Picture
   property :pic_id, Serial 
   property :folder, String 
   property :tag, String
-  property :file_path, string
+  property :file_path, String
   belongs_to :user
+  #belongs_to :folder
+end
+
+class Folder
+  include DataMapper::Resource 
+  property :folder_id, Serial 
+  property :name, String 
+  property :file_path, String
+  belongs_to :user
+  has n, :pictures
 end 
 
 DataMapper.finalize.auto_upgrade!
@@ -63,6 +76,7 @@ post '/users' do
    users = User.new(params[:users])
 
    if users.save
+      session[:name] = users.user_id
       redirect "/MainPage.html"
    else
       return "Username already in use"
