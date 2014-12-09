@@ -53,6 +53,7 @@ end
 
 configure do
     set :token, ''
+    set :username, ''
 end
 
 get "/enroll/:token" do
@@ -64,6 +65,26 @@ get "/folder_list" do
     user = User.first({:user_id => session[:name]})
     @folders =  user.folders.all()
     erb :folder_list
+end
+
+get "/MainPage" do
+    erb :MainPage
+end
+
+get "/logout" do
+    session[:name] = ''
+    redirect "/login.html"
+end
+
+get "/upload_image" do
+    user = User.first({:user_id => session[:name]})
+    @folders =  user.folders.all()
+    erb :upload_image
+end
+
+get "/upload_to_folder/:folder_id" do
+    @folder = Folder.first({:folder_id => params[:folder_id]})
+    erb :upload_to_folder
 end
 
 post "/confirm" do
@@ -86,12 +107,16 @@ post "/confirm" do
       
 end
 
-post '/upload_image' do
-    user = User.first({:user_id => session[:name]})
-    #user.
+post '/upload_to_folder/:folder_id' do
+    folder = Folder.first({:folder_id => params[:folder_id]})
+    folder.pictures.new(:file_path => params[:file], :tag => params[:tag])
+
     tempfile = params[:file][:tempfile] 
     filename = params[:file][:filename] 
-    cp(tempfile.path, "public/uploads/#{filename}")
+    
+    File.open("./public/uploads/#{filename}", 'wb') do |f|
+      f.write(file.read)
+    end
 end
 
 post '/add_folder' do
@@ -114,8 +139,9 @@ post '/users' do
    users.token = users.token.gsub!("/", "0")
 
    if users.save
+      settings.username = users.name
       session[:name] = users.user_id
-      redirect "/MainPage.html"
+      erb :MainPage
    else
       return "Username already in use"
    end
@@ -123,13 +149,13 @@ end
 
 post '/loguser' do 
   user = User.first({:username => params[:username]})
-  
+  settings.username = user.name
   if user.nil?
     return "User does not exist"
   else
     if user.password == params[:password]
       session[:name] = user.user_id
-      redirect "/MainPage.html?#{session[:name]}"
+      erb :MainPage
     else
       return "Wrong Password"
     end

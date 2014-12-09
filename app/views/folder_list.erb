@@ -46,11 +46,13 @@
       <% for folder in @folders %>
              <tr>
              <td><%=folder.name %></td>
-             <td><a href="change_image.html">Add image</a></td>
+             <td><a href=<%="upload_to_folder/#{folder.folder_id}" %> >Add image</a></td>
              </tr>
       <% end %>
       </tr> 
     </table>
     </form>
+
+    <a href="/MainPage">Back to Main</a>
   </table>
 </html>

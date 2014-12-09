@@ -35,14 +35,18 @@
 </head>
 
 	<!-- Head -->
-	<h1>Upload a New Image</h1>
+	<h1><%="Upload a New image to folder: #{@folder.name}" %></h1>
   <table>
-  	<form action='/upload' enctype="multipart/form-data" method='POST'> 
+  	<form action=<%="/upload_to_folder/#{params[:folder_id]}" %> enctype="multipart/form-data" method='POST'> 
       <tr>
-      	<input name="file" type="file" />
+        <p><label for="tag">Tag:</label></p>
+        <input id="tag" name="tag" type="text" />
+        <p><label for="file">Image Path:</label></p>
+      	<input id="file" name="file" type="file" />
                
-      	<input type="button" value="Upload" />
+      	<p><input type="button" value="Upload" /></p>
       </tr> 
   	</form>
   </table>
+  <a href="/folder_list">Back to Folder list</a>
 </html>

@@ -40,13 +40,14 @@
   	<form action='/upload' enctype="multipart/form-data" method='POST'>
       <tr>
         <strong>Folder: </strong>
-        
-      		<select>
-      		  <option value="FolderA">Folder A</option>
-      		  <option value="FolderB">Folder B</option>
-      		  <option value="FolderC">Folder C</option>
-      		  <option value="FolderD">Folder D</option>
-      		</select>
+
+
+        <select>
+          <% for folder in @folders %>
+                 <option value=<%=folder.folder_id %>><%=folder.name %></option>
+
+          <% end %>
+      	</select>
       
       </tr> 
       <BR> <BR>
@@ -56,5 +57,7 @@
       	<input type="button" value="Upload" />
       </tr> 
   	</form>
+
   </table>
+  <a href="/MainPage">Back to Main</a>
 </html>
