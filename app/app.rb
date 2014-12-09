@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'rubygems'
 require 'data_mapper'
 require 'bcrypt'
 
@@ -57,6 +58,12 @@ end
 get "/enroll/:token" do
     settings.token = params[:token]
     redirect "/enroll.html?token=#{settings.token}"
+end
+
+get "/folder_list" do
+    user = User.first({:user_id => session[:name]})
+    @folders =  user.folders.all()
+    erb :folder_list
 end
 
 post "/confirm" do

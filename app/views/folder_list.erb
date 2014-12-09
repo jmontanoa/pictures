@@ -34,26 +34,23 @@
 
 </head>
 
-	<!-- Head -->
-	<h1>Folder List</h1>
+  <!-- Head -->
+  <h1>Folder List</h1>
   <table>
-  	<form action='/upload' enctype="multipart/form-data" method='POST'>
+    <form action='/upload' enctype="multipart/form-data" method='POST'>
       <table border='0'>
       <tr>
         <td><strong>Folder Name </strong></td>
         <td><strong>      </strong></td>
       </tr> 
-      
-      <tr>
-      	<td>Folder A </td>
-        <td><a href="change_image.html">Change image</a>
-        </td>
-      </tr> 
-      <td>Folder B</td>
-        <td><a href="change_image.html">Change image</a>
-      </td>
+      <% for folder in @folders %>
+             <tr>
+             <td><%=folder.name %></td>
+             <td><a href="change_image.html">Add image</a></td>
+             </tr>
+      <% end %>
       </tr> 
     </table>
-  	</form>
+    </form>
   </table>
 </html>
