@@ -1,9 +1,9 @@
 Feature: Login page
-    As a user I should be able to sign-in to the login page
+    User visits the login page in order to login to the page
 
-    Scenario: As I user I should be able to see PICS home page after entering my username and email
+    Scenario: The user should be able to see home page after entering my username and email
 
-        Given I have an username and email
-        When I enter "user" in the username 
-        And I enter "user@mix.com" in the email 
-        Then I should see the PICS home page
+        Given I am on the login page
+        When I enter "user" in the user_name 
+        And I enter "user@mix.com" in the e_mail 
+        Then I should see the home page

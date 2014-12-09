@@ -1,14 +1,11 @@
-Given(/^I have an confirmation link into my email$/) do
-    puts "I have my confirmationlink"
+
+When(/^I click on confirmation link$/) do |confirmation_link|
+    #visit   "http://localhost:4567/link"
+    # click_link "Confirmation"
+    click_link confirmation_link
 end
 
-When(/^I click over confirmation link$/) do
-    visit   "http://localhost:4567/link"
-    # 
-    click_link "Confirmation"
-end
-
-Then(/^I should see the confirmation form$/) do 
+Then(/^I should see the confirmation page$/) do 
 	visit   "http://localhost:4567/enroll"
-	expect(page).to have_content "Confirmation"
+	expect(page).to have_content "Confirmation Form"
 end

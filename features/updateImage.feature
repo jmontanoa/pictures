@@ -1,9 +1,9 @@
 Feature: Update image
-    As a user I should be able to update an image in the PICS application for an specify folder
+    The user should be able to update an image in the PICS application for an specify folder
 
-    Scenario: As I user I should be able to update an image and select a folder wich will belong the image.
+    Scenario: The user should be able to update an image and select a folder wich will belong the image.
 
-        Given I am in the Folder List page
+        Given I am on the Folder List page
         When I click on edit link
         Then I should see the upload_image form
         And I should see the Folder Name selected in the "Folder" list

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
-  <title>Folder List</title>
+  <title>Upload New Image</title>
   <style type="text/css">
   body {
     padding-left: 11em;
@@ -35,25 +35,14 @@
 </head>
 
 	<!-- Head -->
-	<h1>Folder List</h1>
+	<h1>Upload a New Image</h1>
   <table>
-  	<form action='/upload' enctype="multipart/form-data" method='POST'>
-      <table border='0'>
+  	<form action='/upload' enctype="multipart/form-data" method='POST'> 
       <tr>
-        <td><strong>Folder Name </strong></td>
-        <td><strong>      </strong></td>
+      	<input name="file" type="file" />
+               
+      	<input type="button" value="Upload" />
       </tr> 
-      
-      <tr>
-      	<td>Folder A </td>
-        <td><a href="change_image.html">Change image</a>
-        </td>
-      </tr> 
-      <td>Folder B</td>
-        <td><a href="change_image.html">Change image</a>
-      </td>
-      </tr> 
-    </table>
   	</form>
   </table>
 </html>

@@ -1,10 +1,9 @@
-Feature: Confirmation Link
-    As a user I should be able to receive a confirmation link to see the Confirmation application
+Feature: The user confirms the confirmation Link
+    User receives a confirmation link in order to see the Confirmation application
 
-    Scenario: As I user I should be able to confirm my account recently created
+    Scenario: The user should be able to confirm her/his account recently created
 
-        Given I have an confirmation link into my email
-        When I click over confirmation link
-        Then I should see the Confirmation form
-        
-        
+        Given I am on link page
+        And I have an confirmation link into my page
+        When I click on confirmation link
+        Then I should see the Enroll page   
