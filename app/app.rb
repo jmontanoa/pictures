@@ -39,8 +39,8 @@ class Folder
   has n, :pictures
 
   property :folder_id, Serial 
-  property :name, String 
-  property :file_path, String
+  property :name, String, :unique => true 
+  property :description, String
 end 
 
 DataMapper.finalize.auto_upgrade!
@@ -61,6 +61,7 @@ end
 
 post "/confirm" do
   user = User.first({:token => settings.token})
+
   if user.status == true
     return "Account already confirmed"
   else
@@ -79,9 +80,22 @@ post "/confirm" do
 end
 
 post '/upload_image' do
+    user = User.first({:user_id => session[:name]})
+    #user.
     tempfile = params[:file][:tempfile] 
     filename = params[:file][:filename] 
     cp(tempfile.path, "public/uploads/#{filename}")
+end
+
+post '/add_folder' do
+    user = User.first({:user_id => session[:name]})
+
+    user.folders.new(:name => params[:name], :description => params[:description])
+    if user.save
+      redirect "createfolder.html"
+    else
+      return "Failed to add folder"
+    end
 end
 
 get "/" do
