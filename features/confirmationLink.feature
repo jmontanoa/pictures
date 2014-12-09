@@ -3,7 +3,7 @@ Feature: The user confirms the confirmation Link
 
     Scenario: The user should be able to confirm her/his account recently created
 
-        Given I am on link page
+        Given I am on confirm page
         And I have an confirmation link into my page
         When I click on confirmation link
-        Then I should see the Enroll page   
+        Then I should see the Enroll page

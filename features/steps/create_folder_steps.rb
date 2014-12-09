@@ -3,7 +3,7 @@ Given(/^ I am into PICs main page$/) do
 end
 
 When(/^ I click Create Folder link$/) do
-    visit   "http://localhost:4567/createfolder"
+    visit  "http://localhost:4567/createfolder"
 
 end
 

@@ -1,9 +1,9 @@
 Given(/^I have an confirmation link into my email$/) do
-    puts "I have my confirmationlink"
+    puts "I have my confirmation"
 end
 
 When(/^I click over confirmation link$/) do
-    visit   "http://localhost:4567/link"
+    visit   "http://localhost:4567/confirm"
     # puts page.methods
     click_link "Confirmation"
 end

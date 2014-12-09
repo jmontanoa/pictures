@@ -46,11 +46,19 @@ end
 
 DataMapper.finalize.auto_upgrade!
 
-
-get "/link" do
-    redirect "/link.html"
+get "/confirm" do
+  redirect "/confirm.html"
 end
 
+post "/confirm.html" do
+end
+
+ get "/enroll" do
+  redirect "/enroll.html"
+end
+# get "/link" do
+#     redirect "/link.html"
+# end
 configure do
     set :token, ''
     set :username, ''
