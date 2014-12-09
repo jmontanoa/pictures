@@ -68,13 +68,11 @@ post "/confirm" do
     user.lastname = params[:lastname]
     user.status   = true
     user.email    = params[:email]  
-    user.email    = params[:password]
+    user.password = params[:password]
 
     if user.save
       session[:name] = user.user_id
       redirect "/link.html"
-      sleep(3)
-      redirect "/MainPage.html"
     end
   end
       
@@ -87,17 +85,8 @@ post '/upload_image' do
 end
 
 get "/" do
-    redirect "/signin.html"
-end
-
-get "/login.html" do
     redirect "/login.html"
 end
-
-get "/MainPage.html/" do
-    redirect ""
-end
-
 
 post '/users' do 
    users = User.new(params[:users])
@@ -109,6 +98,21 @@ post '/users' do
    else
       return "Username already in use"
    end
+end 
+
+post '/loguser' do 
+  user = User.first({:username => params[:username]})
+  
+  if user.nil?
+    return "User does not exist"
+  else
+    if user.password == params[:password]
+      session[:name] = user.user_id
+      redirect "/MainPage.html?#{session[:name]}"
+    else
+      return "Wrong Password"
+    end
+  end
 end 
 
 
