@@ -1,8 +1,8 @@
-Given(/^Given I am into PICs main page$/) do
+Given(/^ I am into PICs main page$/) do
     puts "I have the main page PICS"
 end
 
-When(/^When I click Create Folder link$/) do
+When(/^ I click Create Folder link$/) do
     visit   "http://localhost:4567/createfolder"
 
 end
@@ -12,11 +12,11 @@ Then(/^I should see the Create Folder page$/) do
     expect(page).to have_content "PICS"
 end
 
-When(/^When I enter "Folder1" in the Folder Name field$/) do |foldername|
-        fill_in "Folder1", :with => foldername
+When(/^ I enter "(.*?)" in the Folder Name field$/) do |value, foldername|
+        fill_in foldername, :with => value
 end
-When(/^I enter "My first folder" in the Description field$/) do |description|
-        fill_in "My first folder", :with => description
+When(/^I enter "(.*?)" in the Description field$/) do |valuedesc, description|
+        fill_in description, :with => valuedesc
         click_button "Create"
 end
 
