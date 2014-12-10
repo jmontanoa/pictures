@@ -64,11 +64,11 @@ end
 post "/link.html" do
 
 end
- get "/folder_list" do
-  redirect "/folder_list.html"
-end
-post "/folder_list.html" do
-end
+#get "/folder_list" do
+#redirect "/folder_list.html"
+#end
+#post "/folder_list.html" do
+#end
 
 configure do
     set :token, ''
@@ -152,6 +152,33 @@ post '/upload_to_folder/:folder_id' do
 
     if folder.save
       redirect "folder_images/#{params[:folder_id]}"
+    else
+      return "Failed to upload the image"
+    end
+
+end
+
+post '/upload' do
+    folder = Folder.first({:folder_id => params[:folder]})
+    user   = User.first({:user_id => session[:name]})
+    folder.pictures.new(:file_path => params[:file][:filename], :tag => params[:tag])
+
+    filename = params[:file][:filename]
+    tempfile = params[:file][:tempfile]  
+    
+    if user.status == false 
+       if folder.pictures.count > 1
+          return "Please confirm your account to continue"
+       end
+    end
+
+    FileUtils::mkdir_p("./public/uploads/#{session[:name]}")
+    File.open("./public/uploads/#{session[:name]}/#{filename}", 'wb') do |f|
+      f.write(tempfile.read)
+    end
+
+    if folder.save
+      redirect "folder_images/#{params[:folder]}"
     else
       return "Failed to upload the image"
     end

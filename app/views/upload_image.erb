@@ -42,9 +42,9 @@
         <strong>Folder: </strong>
 
 
-        <select>
+        <select name="folder">
           <% for folder in @folders %>
-                 <option value=<%=folder.folder_id %>><%=folder.name %></option>
+                 <option id="folder_id" name="folder_id" value=<%=folder.folder_id %>><%=folder.name %></option>
 
           <% end %>
       	</select>
@@ -52,9 +52,12 @@
       </tr> 
       <BR> <BR>
       <tr>
-      	<input name="file" type="file" />
+        <p><label for="tag">Tag:</label></p>
+        <input id="tag" name="tag" type="text" />
+        <p><label for="file">Image Path:</label></p>
+        <input id="file" name="file" type="file" />
                
-      	<input type="button" value="Upload" />
+        <p><input name="submit" type="submit" value="Upload to folder" /></p>
       </tr> 
   	</form>
 
