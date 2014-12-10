@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
-  <title>Folder List</title>
+  <title>Upload New Image</title>
   <style type="text/css">
   body {
     padding-left: 11em;
@@ -34,27 +34,16 @@
 
 </head>
 
-  <!-- Head -->
-  <h1>Folder List</h1>
-  <table>
-    <form action='/upload' enctype="multipart/form-data" method='POST'>
-      <table border='0'>
-      <tr>
-        <td><strong>Folder Name </strong></td>
-        <td><strong>      </strong></td>
-      </tr> 
-      <% for folder in @folders %>
-             <tr>
-             <td><%=folder.name %></td>
-             <td><a href=<%="upload_to_folder/#{folder.folder_id}" %> >Add image</a>
-                 <a href=<%="folder_images/#{folder.folder_id}" %> >See Images</a>
-             </td>
-             </tr>
-      <% end %>
-      </tr> 
-    </table>
-    </form>
-
-    <a href="/MainPage">Back to Main</a>
-  </table>
+	<!-- Head -->
+  <h1><%="Folder: #{@folder.name}" %></h1>
+  <a href="/folder_list">Back to Folder list</a>
+   <body>
+     <table border = 5 bordercolor = red align = left>
+     <th colspan = 14>Images</th>
+     <% for picture in @folder.pictures.all %>
+     <td colspan = 4><img src="http://localhost:4567/uploads/<%= session[:name]%>/<%= picture.file_path %>" alt="" border=3 height=300 width=300/></td>
+     <% end %>
+     </table>
+   </body> 
+  
 </html>

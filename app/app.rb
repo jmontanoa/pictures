@@ -2,6 +2,7 @@ require 'sinatra'
 require 'rubygems'
 require 'data_mapper'
 require 'bcrypt'
+require 'fileutils'
 
 enable :sessions
 
@@ -27,10 +28,9 @@ class Picture
 
   belongs_to :folder, :required => false
 
-  property :pic_id, Serial 
-  property :folder, String 
+  property :pic_id, Serial
   property :tag, String
-  property :file_path, String
+  property :file_path, Text
 end
 
 class Folder
@@ -40,7 +40,7 @@ class Folder
   has n, :pictures
 
   property :folder_id, Serial 
-  property :name, String, :unique => true 
+  property :name, String
   property :description, String
 end 
 
@@ -95,6 +95,11 @@ get "/upload_to_folder/:folder_id" do
     erb :upload_to_folder
 end
 
+get "/folder_images/:folder_id" do
+    @folder = Folder.first({:folder_id => params[:folder_id]})
+    erb :folder_images
+end
+
 post "/confirm" do
   user = User.first({:token => settings.token})
 
@@ -117,20 +122,42 @@ end
 
 post '/upload_to_folder/:folder_id' do
     folder = Folder.first({:folder_id => params[:folder_id]})
-    folder.pictures.new(:file_path => params[:file], :tag => params[:tag])
+    user   = User.first({:user_id => session[:name]})
+    folder.pictures.new(:file_path => params[:file][:filename], :tag => params[:tag])
 
-    tempfile = params[:file][:tempfile] 
-    filename = params[:file][:filename] 
+    filename = params[:file][:filename]
+    tempfile = params[:file][:tempfile]  
     
-    File.open("./public/uploads/#{filename}", 'wb') do |f|
-      f.write(file.read)
+    if user.status == false 
+       if folder.pictures.count > 1
+          return "Please confirm your account to continue"
+       end
     end
+
+    FileUtils::mkdir_p("./public/uploads/#{session[:name]}")
+    File.open("./public/uploads/#{session[:name]}/#{filename}", 'wb') do |f|
+      f.write(tempfile.read)
+    end
+
+    if folder.save
+      redirect "folder_images/#{params[:folder_id]}"
+    else
+      return "Failed to upload the image"
+    end
+
 end
 
 post '/add_folder' do
     user = User.first({:user_id => session[:name]})
 
     user.folders.new(:name => params[:name], :description => params[:description])
+
+    if user.status == false 
+       if user.folders.count > 1
+          return "Please confirm your account to continue"
+       end
+    end
+
     if user.save
       redirect "createfolder.html"
     else
@@ -157,10 +184,10 @@ end
 
 post '/loguser' do 
   user = User.first({:username => params[:username]})
-  settings.username = user.name
   if user.nil?
     return "User does not exist"
   else
+    settings.username = user.name
     if user.password == params[:password]
       session[:name] = user.user_id
       erb :MainPage
