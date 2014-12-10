@@ -111,6 +111,16 @@ get "/folder_images/:folder_id" do
     erb :folder_images
 end
 
+get "/search_by_tag" do
+    erb :search_by_tag
+end
+
+get "/tag_images/:tag" do
+    user = User.first({:user_id => session[:name]})
+    @pics = user.folders.pictures.all(:fields => [:file_path], :tag => params[:tag])
+    erb :tag_images
+end
+
 post "/confirm" do
   user = User.first({:token => settings.token})
 
@@ -233,6 +243,10 @@ post '/loguser' do
       return "Wrong Password"
     end
   end
-end 
+end
+
+post '/search_tag' do
+    redirect "tag_images/#{params[:tag]}"
+end
 
 

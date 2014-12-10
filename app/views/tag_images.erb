@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+  <title>Upload New Image</title>
+  <style type="text/css">
+  body {
+    padding-left: 11em;
+    font-family: Georgia, "Times New Roman",
+          Times, serif;
+    color: purple;
+    background-color: #EFFBFB }
+  ul.navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 9em }
+  h1 {
+    font-family: Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif }
+  ul.navbar li {
+    background: white;
+    margin: 0.5em 0;
+    padding: 0.3em }
+  ul.navbar a {
+    text-decoration: none }
+  a:link {
+    color: blue }
+  a:visited {
+    color: purple }
+  </style>
+
+</head>
+
+	<!-- Head -->
+  <h1></h1>
+  <a href="/search_by_tag">Back to search by tag</a>
+   <body>
+     <table border = 5 bordercolor = red align = left>
+     <th colspan = 14>Imags</th>
+     <% for pic in @pics %>
+     <td colspan = 4><img src="http://localhost:4567/uploads/<%= session[:name]%>/<%= pic.file_path %>" alt="" border=3 height=300 width=300/></td>
+     <% end %>
+     </table>
+   </body> 
+  
+</html>
