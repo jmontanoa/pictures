@@ -10,4 +10,4 @@ Feature: Confirmation Form
         And I enter "user1" in the lastname
         And I enter "user@t.com" in the email 
         And I enter "testing" in the password
-        Then I should see the PICS home page
+        Then I should see the Confirmation message

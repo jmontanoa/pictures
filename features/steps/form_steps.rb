@@ -27,6 +27,7 @@ When(/^I enter "(.*?)" in the password$/) do |password|
         click_button "Enroll"
 end
 
-Then(/^I should see the  home page$/) do
-    expect(page).to have_content "PICS"
+Then(/^I should see the  confirmation message page$/) do
+    visit "http://localhost:4567/link.html"
+    expect(page).to have_content "welcome"
 end

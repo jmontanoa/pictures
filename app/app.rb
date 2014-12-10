@@ -53,12 +53,23 @@ end
 post "/confirm.html" do
 end
 
- get "/enroll" do
+get "/enroll" do
   redirect "/enroll.html"
 end
-# get "/link" do
-#     redirect "/link.html"
-# end
+
+get "/link" do
+  redirect "/link.html"
+end
+
+post "/link.html" do
+
+end
+ get "/folder_list" do
+  redirect "/folder_list.html"
+end
+post "/folder_list.html" do
+end
+
 configure do
     set :token, ''
     set :username, ''
